@@ -1,43 +1,46 @@
 import React from 'react';
-import logo from './assets/logo.svg';
 import './App.css';
-import Header from './components/Header'
-import Footer from './components/Footer'
 
 class App extends React.Component{
   constructor(){
     super();
     this.state = {
-      name: '',
-      isLoggedIn: false
+      counter: 0,
+      inputText: '',
     }
   }
 
-  onSubmit = () => {
-    const newState = { isLoggedIn: true };
-    this.setState(newState);
+  // TODO: still working on onChange function
+  onChange = (event) => {
+    let inputText = event.target.value;
+    this.setState({inputText});
   }
 
-  logOut = () => {
-    const newState = { isLoggedIn: false };
-    this.setState(newState);
+  onIncrease = () => {
+    if (this.state.counter === this.state.inputText){
+      let counter = this.state.inputText
+      this.setState({counter})}
+    else {
+      let counter = this.state.counter +1;
+      this.setState({counter})
+    }
+  }
+
+  onDecrease = () => {
+    if (this.state.counter > 0){
+      let counter = this.state.counter -1;
+      this.setState({counter})
+    } 
   }
 
   render() {
-    const loggedIn = <Header isLoggedIn={this.state.isLoggedIn} name={this.state.name}/>;
-    const guest = ( <div>
-        <h1>Please Sign in.</h1>
-        <input />
-        <button onClick={this.onSubmit}>Sign In</button>
-      </div> );
-
-    const logOut = <button onClick={this.logOut}>Log Out</button>;
-
+    console.log(this.state.counter);
     return (
       <div className="App">
-        { this.state.isLoggedIn ? loggedIn : guest }
-        { this.state.isLoggedIn ? logOut : null }
-        <Footer />
+        <h2 id='s'>Counter: {this.state.counter}</h2>
+        <input onChange= {this.onChange}/>
+        <button onClick={this.onIncrease}>Increase</button>
+        <button onClick={this.onDecrease}>Decrease</button>
       </div>
     )
   }
