@@ -6,12 +6,11 @@ class App extends React.Component{
     super();
     this.state = {
       counter: 0,
-      inputText: 'Enter Number',
+      inputText: '',
       maxValue: Infinity,
       errorMessage: ''
     }
   }
-
   onChange = (event) => {
     if (!event.isInteger) {
       this.setState({ errorMessage: "Numbers Only"}); 
@@ -43,7 +42,7 @@ class App extends React.Component{
     return (
       <div className="App">
         <h2 id='s'>Counter: {this.state.counter}</h2>
-        <input value={this.state.inputText} onChange={this.onChange}/>  
+        <input placeholder="Enter number" onChange={this.onChange}/>  
         <button onClick={this.onIncrease}>Increase</button>
         <button onClick={this.onDecrease}>Decrease</button>
         <button onClick={this.resetCounter}>Reset</button>
