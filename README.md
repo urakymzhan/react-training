@@ -1,3 +1,3 @@
 # counter app with react
 
-![Alt text](src/assets/main1.png)
+![Alt text](src/assets/updated.png)
