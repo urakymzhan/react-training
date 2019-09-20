@@ -3,17 +3,19 @@
   margin-top: 10%;
 }
 #s {
-  font-size: 5em;
+  font-size: 6em;
   color: green;
   margin-bottom:1%;
   font-family: 'Bangers', cursive
 }
 input {
   width: 13%;
+  position: center;
 }
 input:hover {
-  background-color: green;
+  background-color: lightgreen;
 }
+
 button:hover {
-  background-color: green;
+  background-color: lightgreen;
 }

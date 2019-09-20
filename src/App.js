@@ -6,11 +6,16 @@ class App extends React.Component{
     super();
     this.state = {
       counter: 0,
-      inputText: '',
+      inputText: 'Enter Number',
       maxValue: Infinity,
+      errorMessage: ''
     }
   }
+
   onChange = (event) => {
+    if (!event.isInteger) {
+      this.setState({ errorMessage: "Numbers Only"}); 
+    }
     this.setState({
       maxValue: parseInt(event.target.value)
     });
@@ -30,13 +35,19 @@ class App extends React.Component{
     } 
   }
 
+  resetCounter = (event) => {
+    this.setState({counter: 0, errorMessage: '', inputText: ''});
+  }
+
   render() {
     return (
       <div className="App">
         <h2 id='s'>Counter: {this.state.counter}</h2>
-        <input onChange= {this.onChange}/>
+        <input value={this.state.inputText} onChange={this.onChange}/>  
         <button onClick={this.onIncrease}>Increase</button>
         <button onClick={this.onDecrease}>Decrease</button>
+        <button onClick={this.resetCounter}>Reset</button>
+        <p>{this.state.errorMessage}</p>
       </div>
       )
     }
