@@ -12,12 +12,16 @@ class App extends React.Component{
     }
   }
   onChange = (event) => {
-    if (!event.isInteger) {
-      this.setState({ errorMessage: "Numbers Only"}); 
-    }
+    var str = event.target.value;
+    var reg = new RegExp('^[0-9]+$'); // regex to check if input string contains only numbers
+    if (!reg.test(str)) {    
+      this.setState({ errorMessage: "Numbers Only"});  
+    } 
+    // TODO: make sure to clear TEXT when i am only deleting an element in input field delete 
+    // right now it outputs Numbers Only when i try to clear input
     this.setState({
-      maxValue: parseInt(event.target.value)
-    });
+      maxValue: parseInt(str),
+      });
   }
 
   onIncrease = () => {
@@ -35,7 +39,9 @@ class App extends React.Component{
   }
 
   resetCounter = (event) => {
-    this.setState({counter: 0, errorMessage: '', inputText: ''});
+    let errorMessage = this.state.errorMessagee;
+    let inputText = this.state.inputText; 
+    this.setState({counter: 0,  errorMessage, inputText});
   }
 
   render() {
