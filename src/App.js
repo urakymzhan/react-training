@@ -6,22 +6,26 @@ class App extends React.Component{
     super();
     this.state = {
       counter: 0,
-      inputText: '',
       maxValue: Infinity,
-      errorMessage: ''
+      errorMessage: '',
+      name: ''
     }
   }
   onChange = (event) => {
-    var str = event.target.value;
-    var reg = new RegExp('^[0-9]+$'); // regex to check if input string contains only numbers
-    if (!reg.test(str)) {    
-      this.setState({ errorMessage: "Numbers Only"});  
-    } 
-    // TODO: make sure to clear TEXT when i am only deleting an element in input field delete 
-    // right now it outputs Numbers Only when i try to clear input
+    var input_str = event.target.value;
+    this.setState({name: input_str,})
+    // regex to check if input string contains only numbers
+    var reg = new RegExp('^[0-9]+$'); 
+    if (!reg.test(input_str) && input_str !== '') {    
+      this.setState({ errorMessage: "Numbers Only !"});  
+    }
+    else {
     this.setState({
-      maxValue: parseInt(str),
-      });
+        maxValue: parseInt(input_str),
+        // this needed to clear errorMessage when you clearing input 
+        errorMessage: ''
+        });
+    }
   }
 
   onIncrease = () => {
@@ -39,16 +43,14 @@ class App extends React.Component{
   }
 
   resetCounter = (event) => {
-    let errorMessage = this.state.errorMessagee;
-    let inputText = this.state.inputText; 
-    this.setState({counter: 0,  errorMessage, inputText});
+    this.setState({counter: 0,  errorMessage: ' ', maxValue: 0, name: ''});
   }
 
   render() {
     return (
       <div className="App">
         <h2 id='s'>Counter: {this.state.counter}</h2>
-        <input placeholder="Enter number" onChange={this.onChange}/>  
+        <input value={this.state.name} onChange={this.onChange} placeholder='enter number'/>  
         <button onClick={this.onIncrease}>Increase</button>
         <button onClick={this.onDecrease}>Decrease</button>
         <button onClick={this.resetCounter}>Reset</button>
